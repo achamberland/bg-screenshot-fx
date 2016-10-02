@@ -1,6 +1,9 @@
-
-// MIT License
-// Requires jquery 1.5+
+/* Photoshop-style Filtered Backgrounds
+ *
+ * MIT License
+ * Requires jquery 1.5+ (For now)
+ *
+ */
 
 (function(window, html2canvas) {
 
@@ -47,6 +50,7 @@
 			useCORS: true,
 			effects: {
 				invert: 90,
+				hue-rotate: 90,
 				saturate: 300,
 				contrast: 30,
 				brightness: 40,
@@ -101,7 +105,7 @@
 		addEffects: function() {
 			var self = this;
 			var filterString = Object.keys(this.options.effects).reduce(function(prev, curr) {
-				var value = this.options.effects[curr];
+				var value = (curr === 'url') ? self.options.effects[curr] : parseInt(self.options.effects[curr], 10);
 				var unit = self.filterUnits[curr] || self.filterUnits.default;
 
 				var formatted = curr + "(" + value + unit + ") ";
@@ -116,17 +120,21 @@
 
 		render: function() {
 			var self = this;
+			var promise = $.Deferred();
 			this.makeScreenshot()
 				.then(function() {
 					self.styleParent();
 				    self.addEffects();
-		    		self.canvas.addClass('totesBg');
+		    		self.canvas.addClass('filter-bg');
 					self.attachBackground();
+					promise.resolve();
 				});
+
+			return promise;
 		}
 	}
 
-	var totesBg = function(target, options) {
+	var FilterBg = function(target, options) {
 		options = typeof options === 'object' ? options : {};
 		options.effects = typeof options.effects === 'object' ? options.effects : {};
 
@@ -154,11 +162,11 @@
 			},
 
 			update: function() {
-				renderer.render(this.target);
+				return renderer.render(this.target);
 			},
 
 			clear: function() {
-				var canvas = $(this.target).find(".totesBg");
+				var canvas = $(this.target).find(".filter-bg");
 
 				if (canvas.length > 0) {
 					canvas.remove();
@@ -185,6 +193,6 @@
 		}
 	}
 
-	window.TotesBg = totesBg;
+	window.FilterBg = FilterBg;
 
 })(window, window.html2canvas);
