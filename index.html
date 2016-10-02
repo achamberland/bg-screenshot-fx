@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Demo</title> 
+
+
+
+	<style>
+
+	.container {
+	}
+
+	.demoShape {
+		width:300px;
+		height:300px;
+		background: #f00;
+	}
+
+
+	.dialog {
+		position:absolute;
+		top: 50px;
+		left:250px;
+		width:100px;
+		height:100px;
+
+    	overflow: hidden;
+	}
+
+	.totesBg {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	    -webkit-filter: invert(90%) saturate(300%) contrast(30%) brightness(40%) blur(3px);
+	}
+
+	<!-- TRY MIX-BLEND-MODE INSTEAD OF CSS FILTERS -->
+
+
+	</style>
+
+
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <script type="text/javascript" src="index.js"></script>
+
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div class="content">
+			saidjnkasjdn asdkajsd jasdjkas dnja
+
+			<div class="demoShape"></div>
+
+			<div class="dialog"></div>
+		</div>
+
+	</div>
+
+	<script>
+	
+		var demo = TotesBg($(".dialog"));
+
+	</script>
+
+</body>
+
+</htmL>

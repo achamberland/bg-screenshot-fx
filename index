@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Demo</title> 
+
+
+
+	<style>
+
+	.container {
+		position: relative
+	}
+
+
+	.canvas {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	    -webkit-filter: invert(90%) saturate(300%) contrast(30%) brightness(40%) blur(3px);
+	}
+
+	</style>
+
+
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.js"></script>
+
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div class="content"></div>
+
+	</div>
+
+	<script>
+		(function(window, html2canvas) {
+
+			var doIt = function(options) {
+
+				var screen = $(window);
+				var container = $(".container");
+
+				var renderCanvas = function(canvas) {
+					container.append(canvas);
+
+				    var dialogPos = container.offset();
+				    var xPos = dialogPos.left - $(window).scrollLeft();
+				    var yPos = dialogPos.top - $(window).scrollTop();
+				    var positionString = xPos + 'px ' + yPos + 'px';
+				    canvas.css('background-position', positionString);
+				}
+
+				var options = {
+					logging: true,
+					useCORS: true,
+					onrendered: renderCanvas
+				};
+
+				var canvas = html2canvas(screen, options);
+			}
+
+			doIt();
+
+		})(window, html2canvas);
+	</script>
+
+</body>
+
+</htmL>
